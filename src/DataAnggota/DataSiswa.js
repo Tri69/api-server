@@ -1,4 +1,4 @@
-econst DataSiswaProgramming = [
+const DataSiswa = [
     {
         id:1,
         name:'Pasha Mulyanto Utomo',
@@ -74,6 +74,12 @@ econst DataSiswaProgramming = [
         name: 'Lukman Arrahman',
         class:'XI TKR C',
         nis:9115
-    }
+    },{
+		id: 16,
+		name:'Ilham Trihandoyo',
+		nis: 9081
+	}
         
 ];
+
+export default DataSiswa;
