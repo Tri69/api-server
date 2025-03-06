@@ -1,16 +1,29 @@
 import express from "express";
-import { getDataFind, PostData } from '../DataAnggota/mongoose';
-import { getDataUser, getKeyUser } from "../DataAnggota/IndexData";
+import { GetDataFind, PostData, UpdateData, DeleteData } from '../Models/mongoose.js';
+import { getDataUser, getKeyUser } from "../DataAnggota/IndexData.js";
+import { GetAbsensiData, FormAbsensiData } from "../Models/AbsensiModel.js";
 
-const Routes = express.Route();
-
-const Route = () => {
-    Routes.get('/api/v2', getDataUser);
-    Routes.get('/api/v2/:WordKey', getKeyUser);
-    Routes.get('/api/v2/getUser', getDataFind);
-    Routes.post('/api/v2/postUser', PostData);
-   
+const Routes = express.Router();
+const MiddlewareData = () => {
+    return 'tes'
 }
 
-export default Route;
+//Routes pada Form Pendaftaran Organisasi
+Routes.get('/api/v2/getUser', GetDataFind);
+Routes.post('/api/v2/postUser', PostData);
+Routes.put('/api/v2/updateData', UpdateData);
+Routes.delete('/api/v2/deleteData', DeleteData)
+
+
+//Routes pada Sistem Absensi Harian
+Routes.get('/api/v2/ListAbsensi', GetAbsensiData);
+Routes.post('/api/v2/Absensi', FormAbsensiData);
+
+
+//Routes pada sistem List Anggota
+Routes.get('/api/v2', getDataUser);
+Routes.get('/api/v2/:WordKey', getKeyUser);
+
+
+export default Routes;
 
