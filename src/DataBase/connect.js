@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const url = 'mongodb+srv://ilhamtauhandoyo:1oBNKnvfmJHTotql@data1.tec7t.mongodb.net/Form?retryWrites=true&w=majority&appName=Data1'
 mongoose.connect(url);
@@ -7,6 +7,7 @@ const db = mongoose.connection;
 db.once('open', ()=> {
 	console.log('connect')
 })
+
 const SchemaUser =  mongoose.Schema({
 	name: {
 		type:String,
@@ -52,9 +53,59 @@ const SchemaUserAbsensi =  mongoose.Schema({
 		type:String,
 		required:true
 	},
-	
-
 });
+const SchemaRegister = new mongoose.Schema(
+	{
+		username: {
+			type:String,
+			required:true
+		},
+		email:{
+			type:String,
+			required:true
+		},
+		password:{
+			type:String,
+			required:true
+		},
+		token:{
+			type:String,
+			required:true
+		}
+	}
+)
+
+const SchemaSaran = mongoose.Schema({
+	name : {
+		type:String,
+		required:true
+	},
+	devisi : {
+		type:String,
+		required:true
+	},
+	kritik : {
+		type:String,
+		required : true
+	},
+	saran :{
+		type:String,
+		required:true
+	},
+	pengalaman : {
+		type:String,
+		required:true
+	},
+	tambahbidang:{
+		type:String,
+		required:true
+	}
+
+
+})
  const User = mongoose.model('User', SchemaUser);
 export const UserAbsensi = mongoose.model('UserAbsensi', SchemaUserAbsensi);
+export const UserRegister = mongoose.model('UserRegister', SchemaRegister);
+export const UserSaran = mongoose.model('UserSaran', SchemaSaran);
+
 export default User;
