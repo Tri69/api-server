@@ -6,13 +6,13 @@ export const postSaran = async (req, res)=> {
         const ModelDataPost = new UserSaran(getDataPost);
         await ModelDataPost.save();
         res.json({
-            status : 201,
-            details: "Success",
-            datas : getDataPost
+            statusCode : 201,
+            massage : "Success your Created Data",
+            data : getDataPost
         })
     }catch(err){
         res.json({
-            status: 401,
+            statusCode: 401,
             details: "Error Data Not Valid"
         })
     }
@@ -21,8 +21,8 @@ export const postSaran = async (req, res)=> {
 export const getSaran = async (req, res)=> {
     const getDataFind = await UserSaran.find();
     res.json({
-        status:200,
-        details: 'Success',
-        datas : getDataFind
+        statusCode : 200,
+        Massage : 'Success umur get Data',
+        data : getDataFind
     });
 }
