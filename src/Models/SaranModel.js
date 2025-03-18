@@ -20,7 +20,9 @@ export const postSaran = async (req, res)=> {
 
 export const getSaran = async (req, res)=> {
     const getDataFind = await UserSaran.find();
+    const getIpAddress = req.ip
     res.json({
+        IpAddress : getIpAddress, 
         statusCode : 200,
         Massage : 'Success umur get Data',
         data : getDataFind
