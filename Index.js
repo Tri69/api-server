@@ -1,14 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import Routes from './src/Router/Route.js';
-import ejs from 'ejs';
+import RouterAuth from './src/Router/AuthRoute.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const App = express();
-const PORT = 3005;
 
 App.use(cors());
 App.use(express.json());
-App.use(Routes);
 App.set('view engine', 'ejs');
 
 App.get('/', (req, res)=> {
@@ -18,7 +18,9 @@ App.get('/', (req, res)=> {
     res.render('index', data);
 });
 
+App.use(Routes);
+App.use(RouterAuth);
 
-App.listen(PORT, () => {
-    console.log("Server is Running");
+App.listen(process.env.PORT_SERVER, () => {
+    console.log(`Server  Running in port ${process.env.PORT_SERVER}`);
 });

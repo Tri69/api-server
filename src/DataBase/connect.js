@@ -1,7 +1,8 @@
 import mongoose, { Schema } from "mongoose";
+import dotenv from 'dotenv';
+dotenv.config();
 
-const url = 'mongodb+srv://ilhamtauhandoyo:1oBNKnvfmJHTotql@data1.tec7t.mongodb.net/Form?retryWrites=true&w=majority&appName=Data1'
-mongoose.connect(url);
+mongoose.connect(process.env.URI_MONGODB_ATLAS);
 const db = mongoose.connection;
 
 db.once('open', ()=> {

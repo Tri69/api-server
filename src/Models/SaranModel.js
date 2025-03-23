@@ -1,30 +1,36 @@
 import { UserSaran } from "../DataBase/connect.js";
 
-export const postSaran = async (req, res)=> {
+export const postSaran = async (req, res) => {
     const getDataPost = req.body;
-    try{
-        const ModelDataPost = new UserSaran(getDataPost);
-        await ModelDataPost.save();
+    try {
+        const PostDataModel = new UserSaran(getDataPost);
+        await PostDataModel.save();
         res.json({
-            statusCode : 201,
-            massage : "Success your Created Data",
-            data : getDataPost
-        })
-    }catch(err){
+            statusCode: 201,
+            massage: "Success data is created.",
+            datas: getDataPost
+        });
+    } catch (err) {
         res.json({
             statusCode: 401,
-            details: "Error Data Not Valid"
-        })
+            massage: "Error Data Not Valid",
+            datas: null
+        });
     }
 }
 
-export const getSaran = async (req, res)=> {
-    const getDataFind = await UserSaran.find();
-    const getIpAddress = req.ip
-    res.json({
-        IpAddress : getIpAddress, 
-        statusCode : 200,
-        Massage : 'Success umur get Data',
-        data : getDataFind
-    });
+export const getSaran = async (req, res) => {
+    try {
+        const getDataFind = await UserSaran.find();
+        res.json({
+            statusCode: 200,
+            massage: 'Success, your get Data.',
+            datas: getDataFind
+        });
+    } catch (err) {
+        res.json({
+            statusCode: 403,
+            massage: "Bad Gateway"
+        });
+    }
 }

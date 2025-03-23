@@ -7,4 +7,6 @@ function ValidationDataPost(name, email, clas, devison, motivation) {
     }
 
 }
+
+
 export default ValidationDataPost;

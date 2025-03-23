@@ -1,46 +1,34 @@
 import jsonwebtoken from "jsonwebtoken";
-import  { UserRegister } from "../DataBase/connect.js";
-//import mongoose from "mongoose";
 
-const SECRET = 'Kirti@2025';
-export function MiddlewareData (req, res, next){
-    const tokenize = req.header('authorization');
-    res.send(tokenize);
-    
-
-}
-
-export const Register = async (req, res) => {
-    const {username, email, password} = req.body;
-   
-       
-        const data = {
-            username: username,
-            email: email,
-            password: password,
-            
+export async function MiddlewareAuth(req, res, next) {
+    const getToken = req.header('Authorization')
+    if (!getToken || getToken == null) {
+       console.log("Token Kadaluwarsa")
+       return res.json({data : false})
+    }
+        const token = getToken.split(' ')[1];
+        const verifyToken = jsonwebtoken.verify(token, process.env.SECRET_CODE)
+        if (verifyToken) {
+            console.log("Login Behasil")
+            next()
         }
-        const token = jsonwebtoken.sign(data, SECRET);
-        const SaveDataBaseN = {
-            username: username,
-            email : email,
-            password:password,
-            token:token
+        else {
+           console.log("Gagal Password Salah")
         }
-        const SaveData = new UserRegister(SaveDataBaseN);
-        await SaveData.save();
-        res.json({massage: 'Succes', token : token});
+    }
 
-  
-        //res.status(401).json({message:err});
-    
+export  function Dashboard(req, res) {
+    const getDataUser = req.header("Authorization").split(" ")[1];
+    const verifyData = jsonwebtoken.verify(getDataUser, process.env.SECRET_CODE)
+    console.log(verifyData)
+
+    res.json({
+        statusCode: 200,
+        massage: "Berhasil Masuk",
+        DataProfile: verifyData
+    })
 }
-export const Login = (req, res, next)=> {
-    const getUserLogin = req.headers.authorization;
-    res.json(getUserLogin)
-    next()
-}
-export const Dashboard = async (req, res)=> {
-    const datas = await UserRegister.find();
-    res.json(datas)
+
+export  function ProfilPerson(req, res){
+    res.send("Selamat Datang");
 }
