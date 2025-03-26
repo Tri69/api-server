@@ -11,6 +11,7 @@ export const Register = async (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
+	   devisi : req.body.devisi,
         token : createRefToken
     }
     const SaveData = new UserRegister(data);

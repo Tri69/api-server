@@ -14,7 +14,8 @@ export const Login = async (req, res, next) => {
             const parseData = {
                 username: selectdbemail.username,
                 email: selectdbemail.email,
-                password: selectdbemail.password
+                password: selectdbemail.password,
+				devisi : selectdbemail.devisi
             }
             const createToken = jsonwebtoken.sign(parseData, process.env.SECRET_CODE)
             res.json({
