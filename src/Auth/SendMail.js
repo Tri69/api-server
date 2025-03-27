@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 async function sendMailOauth(email){
 	const transporter = nodemailer.createTransport({
-	host : 'smtp.gmail.com',
+	host : 'smtps.gmail.com',
 	port : 465,
 	secure : true,
 	auth : {
