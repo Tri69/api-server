@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 
 async function sendMailOauth(email){
 	const transporter = nodemailer.createTransport({
+	service: "Gmail",
 	host : 'smtp.gmail.com',
 	port : 465,
 	secure : true,
@@ -10,8 +11,8 @@ async function sendMailOauth(email){
 		user : process.env.EMAIL_OAUTH,
 		pass : process.env.PASSWORD_OAUTH,
 	},
-		connectionTimeout: 10000, // 10 seconds
-  greetingTimeout: 5000,
+		connectionTimeout: 60000, // 10 seconds
+  greetingTimeout: 30000,
 });
 
 const token = Math.floor(Math.random(340) * 10000);
