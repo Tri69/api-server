@@ -10,6 +10,8 @@ async function sendMailOauth(email){
 		user : process.env.EMAIL_OAUTH,
 		pass : process.env.PASSWORD_OAUTH,
 	},
+		connectionTimeout: 10000, // 10 seconds
+  greetingTimeout: 5000,
 });
 
 const token = Math.floor(Math.random(340) * 10000);
